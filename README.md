@@ -28,6 +28,8 @@ Rotation criteria is a strategy to determine when to rotate currently active wri
 Rotation criteria includes number of documents , index size and index time.
 Graylog uses retention strategy to cleanup old indices which includes deleting index.(Here we give a count i.e maximum number of indices to keep before deleting 
 
+Graylog is writing messages sequentially into ES . It keep information about time range each index covers . It selects list of indices to query when having a time range provided. If no time range is provided it will search into all the indices .
+
 REQUISITES FOR SETUP
 
 Please find DOC enclosed for setting up graylog machine and spring boot application with necessary configuration to communicate with graylog server.
