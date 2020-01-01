@@ -1,0 +1,39 @@
+<configuration>
+<included>
+
+    <property resource="application.properties"/>
+
+    <appender name="MAIN_LOG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>server-path-to-keep-logs-on-server-where-code-deployed</fileNamePattern>
+            <maxFileSize>100MB</maxFileSize>
+            <!-- keep 30 days' worth of history capped at 3GB total size -->
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>5GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="GRAYLOG_TCP" class="com.github.pukkaone.gelf.logback.GelfAppender">
+        <graylogHost>tcp:${graylog.host}</graylogHost>
+        <graylogPort>${server.port}</graylogPort>
+        <originHost>${HOSTNAME}</originHost>
+        <levelIncluded>true</levelIncluded>
+        <locationIncluded>true</locationIncluded>
+        <loggerIncluded>true</loggerIncluded>
+        <markerIncluded>false</markerIncluded>
+        <mdcIncluded>false</mdcIncluded>
+        <threadIncluded>true</threadIncluded>
+        <additionalField>tcp-test-new=test</additionalField>
+        <additionalField>environment=development</additionalField>
+    </appender>
+    <root level="INFO">
+        <appender-ref ref="MAIN_LOG_FILE"/>
+        <appender-ref ref="GRAYLOG_TCP"/>
+    </root>
+
+</included>
+</configuration>
