@@ -29,4 +29,5 @@ Rotation criteria includes number of documents , index size and index time.
 Graylog uses retention strategy to cleanup old indices which includes deleting index.(Here we give a count i.e maximum number of indices to keep before deleting 
 
 REQUISITES FOR SETUP
+
 Please find DOC enclosed for setting up graylog machine and spring boot application with necessary configuration to communicate with graylog server.
