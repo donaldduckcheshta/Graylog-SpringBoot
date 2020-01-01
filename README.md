@@ -1,5 +1,5 @@
 # Graylog-SpringBoot
-server logs management platform
+Server logs management platform
 
 
 Introduction
